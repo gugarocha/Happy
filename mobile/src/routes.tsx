@@ -2,9 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import SplashScreen from './pages/SplashScreen';
+import OnboardingPage from './pages/Onboarding';
 import OrphanagesMap from './pages/OrphanagesMap';
 import OrphanageDetails from './pages/OrphanageDetails';
-
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
 import OrphanageData from './pages/CreateOrphanage/OrphanageData';
 
@@ -12,13 +13,27 @@ import Header from './components/Header';
 
 const Routes = () => {
   const { Navigator, Screen } = createStackNavigator();
+
   return (
     <NavigationContainer>
-      <Navigator screenOptions={{ headerShown: false, cardStyle: { backgroundColor: '#F2F3F5' } }}>
+      <Navigator
+        screenOptions={{ headerShown: false, cardStyle: { backgroundColor: '#F2F3F5' } }}
+      >
+        <Screen
+          name="SplashScreen"
+          component={SplashScreen}
+        />
+
+        <Screen
+          name="Onboarding"
+          component={OnboardingPage}
+        />
+
         <Screen
           name="OrphanagesMap"
           component={OrphanagesMap}
         />
+
         <Screen
           name="OrphanageDetails"
           component={OrphanageDetails}
@@ -36,6 +51,7 @@ const Routes = () => {
             header: () => <Header title='Selecione no mapa' />
           }}
         />
+
         <Screen
           name="OrphanageData"
           component={OrphanageData}

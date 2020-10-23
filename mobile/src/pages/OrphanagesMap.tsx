@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, BackHandler } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -24,6 +24,12 @@ export default function OrphanagesMap() {
     api.get('/orphanages').then(response => {
       setOrphanages(response.data);
     });
+
+    navigation.addListener('beforeRemove', e => {
+      e.preventDefault();
+
+      BackHandler.exitApp()
+    })
   });
 
   function handleNavidateToOrphanageDetails(id: number) {
